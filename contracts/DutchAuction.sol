@@ -11,7 +11,7 @@ interface IERC721 {
 
 contract DutchAuction {
     uint private constant DURATION = 7 days;
-
+    
     IERC721 public immutable nft;
     uint public immutable nftId;
 
@@ -20,6 +20,7 @@ contract DutchAuction {
     uint public immutable startAt;
     uint public immutable expiresAt;
     uint public immutable discountRate;
+    
 
     constructor(
         uint _startingPrice,
@@ -45,17 +46,16 @@ contract DutchAuction {
         return startingPrice - discount;
     }
 
-    function buy(uint price, uint value) external payable {
+    function buy(uint price,address address_account,uint balance) external payable  {
+   
+    
         require(block.timestamp < expiresAt, "auction expired");
 
-     
-        require(value >= price, "ETH < price");
+        require(balance >= price, "ETH < price");
 
-        nft.transferFrom(seller, msg.sender, nftId);
-        uint refund = value - price;
-        if (refund > 0) {
-            payable(msg.sender).transfer(refund);
-        }
-       
+        nft.transferFrom(seller, address_account, nftId);
+        
+        
+
     }
 }

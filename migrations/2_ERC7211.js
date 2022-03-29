@@ -12,6 +12,7 @@ module.exports = async function (deployer) {
 
  await deployer.deploy(ERC7211);
 
- await deployer.deploy(DutchAuction,1000000,1,ERC7211.address,777);
+ await deployer.deploy(DutchAuction,1000000,1,ERC7211.address,77);
 
 };
+
